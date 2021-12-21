@@ -117,6 +117,11 @@ class LoginController extends Controller
         if(auth()->guard('admin')->attempt(['email' => request('email'), 'password' => request('password')])){
 
 
+            
+            
+            
+            
+            
             config(['auth.guards.api.provider' => 'admin']);
 
 
@@ -125,7 +130,9 @@ class LoginController extends Controller
 
             $success =  $admin;
 
-            $success['token'] =  $admin->createToken('MyApp',['admin'])->accessToken;
+
+            $success['api_token'] =  $admin->createToken('MyApp',['admin'])->accessToken;
+
 
 
             return response()->json($success, 200);

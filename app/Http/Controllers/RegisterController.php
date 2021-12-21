@@ -61,7 +61,7 @@ class RegisterController extends Controller
             'password'      => $data['password'],
             'scope'         => null,
         ]);
-        dd($request);
+
         // Fire off the internal request.
         $token = Request::create(
             'oauth/token',
