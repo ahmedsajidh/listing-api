@@ -49,7 +49,7 @@ class RegisterController extends Controller
 
         // And created user until here.
 
-        $client = Client::where('password_client', 1)->first();
+        $client = Client::where('password_client', 0)->first();
 
         // Is this $request the same request? I mean Request $request? Then wouldn't it mess the other $request stuff? Also how did you pass it on the $request in $proxy? Wouldn't Request::create() just create a new thing?
 
@@ -98,7 +98,7 @@ class RegisterController extends Controller
 
         // And created user until here.
 
-        $client = Client::where('password_client', 0)->first();
+        $client = Client::where('password_client', 1)->first();
 
 
         // Is this $request the same request? I mean Request $request? Then wouldn't it mess the other $request stuff? Also how did you pass it on the $request in $proxy? Wouldn't Request::create() just create a new thing?

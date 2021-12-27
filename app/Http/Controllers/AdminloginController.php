@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -17,14 +16,10 @@ use Validator;
 
 use Auth;
 
-
-class LoginController extends Controller
-
+class AdminloginController extends Controller
 {
 
-
-
-    public function userLogin(Request $request)
+    public function adminLogin(Request $request)
 
     {
 
@@ -44,20 +39,20 @@ class LoginController extends Controller
         }
 
 
-        if(auth()->guard('user')->attempt(['email' => request('email'), 'password' => request('password')])){
+        if(auth()->guard('admin')->attempt(['email' => request('email'), 'password' => request('password')])){
 
 
-            config(['auth.guards.api.provider' => 'user']);
+            config(['auth.guards.api.provider' => 'admin']);
 
 
+            $admin = Admin::select('admins.*')->find(auth()->guard('admin')->user()->id);
 
-            $user = User::select('users.*')->find(auth()->guard('user')->user()->id);
+            $success =  $admin;
 
 
-            $success =  $user;
-
-            $success['api_token'] =  $user->createToken('User',['user'])->accessToken;
+            $success['api_token'] =  $admin->createToken('Admin',['admin'])->accessToken;
             dd($success);
+
 
             return response()->json($success, 200);
 
@@ -68,8 +63,5 @@ class LoginController extends Controller
         }
 
     }
-
-
-
 
 }

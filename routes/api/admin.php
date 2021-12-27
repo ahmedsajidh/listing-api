@@ -27,13 +27,13 @@ use App\Http\Controllers\LoginController;
 */
 
 
-Route::post('admin/login',[LoginController::class, 'adminLogin'])->name('adminLogin');
+Route::post('admin/login',[\App\Http\Controllers\AdminloginController::class, 'adminLogin'])->name('adminLogin');
 Route::post('admin/register',[\App\Http\Controllers\RegisterController::class, 'AdminCreate'])->name('adminRegister');
 
 Route::group( ['prefix' => 'admin','middleware' => ['auth:admin-api','scopes:admin'] ],function(){
 
     // authenticated staff routes here
 
-    Route::get('dashboard',[LoginController::class, 'adminDashboard']);
+    Route::get('dashboard',[\App\Http\Controllers\DashboardController::class, 'adminDashboard']);
 
 });
